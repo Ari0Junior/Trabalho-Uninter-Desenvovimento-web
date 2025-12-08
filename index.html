@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Ari_junior</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Meta para melhorar indexação e apresentação -->
+  <meta name="description" content="Portfólio pessoal de Ari_junior — Sobre, Formação, Portfólio e Contato." />
+</head>
+<body class="theme-light">
+  <!-- Menu fixo no topo: visível em todas as seções -->
+  <header class="site-header">
+    <a class="brand" href="#sobre">Ari_junior</a>
+
+    <!-- Botão hamburger para mobile -->
+    <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+
+    <nav id="main-nav" class="nav">
+      <ul>
+        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="#formacao">Formação</a></li>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <!-- Controle de tema -->
+    <button id="theme-toggle" aria-label="Alternar tema">🌓</button>
+  </header>
+
+  <main>
+    <!-- Sobre -->
+    <section id="sobre" class="section container">
+      <h1>Sobre mim</h1>
+      <p>
+        Olá — meu nome é <strong>Ari_junior</strong>. Sou estudante de CIência de Dados na Uninter. Aqui você encontra meu currículo online, projetos e como entrar em contato.
+      </p>
+      <p>Hobbies: Banco de Dados, Artes marciais, projetos pessoais.</p>
+    </section>
+
+    <!-- Formação -->
+    <section id="formacao" class="section container">
+      <h2>Formação</h2>
+      <ul>
+        <li><strong>Curso:</strong> Ciência de Dados — Uninter — 2025</li>
+        <li><strong>Idiomas:</strong> Português (nativo), Inglês (intermediário)</li>
+      </ul>
+    </section>
+
+    <!-- Portfólio -->
+    <section id="portfolio" class="section container">
+      <h2>Portfólio</h2>
+      <p>Abaixo alguns trabalhos e links:</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Projeto Uninter desenvolvimento web</h3>
+          <p>Este é meu primeiro projeto de rsrs.</p>
+          <p><a href="https://github.com/Ari0Junior?tab=repositories" target="_blank" rel="noopener">Código no GitHub</a></p>
+        </article>
+        
+    <!-- Contato com formulário -->
+    <section id="contato" class="section container">
+      <h2>Contato</h2>
+      <p>Preencha o formulário para enviar uma mensagem (simulação).</p>
+
+      <form id="contact-form" novalidate>
+        <!-- campo nome -->
+        <label for="name">Nome</label>
+        <input id="name" name="name" type="text" required placeholder="Seu nome completo" />
+
+        <!-- campo e-mail -->
+        <label for="email">E-mail</label>
+        <input id="email" name="email" type="email" required placeholder="usuario@dominio.com" />
+
+        <!-- campo mensagem -->
+        <label for="message">Mensagem</label>
+        <textarea id="message" name="message" rows="6" required placeholder="Escreva sua mensagem..."></textarea>
+
+        <div class="form-actions">
+          <button type="submit">Enviar mensagem</button>
+          <button type="button" id="reset-btn">Limpar</button>
+        </div>
+
+        <!-- área para mensagens de erro/sucesso (manipulada por JS) -->
+        <div id="form-feedback" role="status" aria-live="polite" class="feedback"></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modal simples para confirmação (oculto por padrão) -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h3 id="modal-title">Mensagem enviada com sucesso!</h3>
+      <p>Obrigado — sua mensagem foi simulada (não houve envio real).</p>
+      <button id="modal-close">Fechar</button>
+    </div>
+  </div>
+
+  <footer class="site-footer container">
+    <p>© <span id="year"></span> Ari_junior — <a href="#sobre">Voltar ao topo</a></p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
