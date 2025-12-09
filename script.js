@@ -1,105 +1,119 @@
-// script.js
-// JS puro: controla menu mobile, validação do formulário, tema e modal de confirmação.
+// script.js — menu mobile, tema, validação do formulário, modal e reveal scroll
 
 // DOM elements
 const navToggle = document.getElementById('nav-toggle');
 const mainNav = document.getElementById('main-nav');
 const themeToggle = document.getElementById('theme-toggle');
 const contactForm = document.getElementById('contact-form');
-const feedbackEl = document.getElementById('form-feedback');
 const resetBtn = document.getElementById('reset-btn');
+const feedbackEl = document.getElementById('form-feedback');
 const modal = document.getElementById('modal');
 const modalClose = document.getElementById('modal-close');
 const yearEl = document.getElementById('year');
+const openCvBtn = document.getElementById('open-cv');
 
-// Atualiza ano do rodapé
-yearEl.textContent = new Date().getFullYear();
+// ano rodapé
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// --- Nav mobile toggle ---
-navToggle.addEventListener('click', () => {
+// NAV MOBILE
+navToggle && navToggle.addEventListener('click', () => {
+  if (!mainNav) return;
   const open = mainNav.classList.toggle('open');
   navToggle.setAttribute('aria-expanded', String(open));
 });
 
-// Fecha menu ao clicar em link (boa usabilidade)
-mainNav.addEventListener('click', (e) => {
-  if (e.target.tagName === 'A' && mainNav.classList.contains('open')) {
-    mainNav.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  }
-});
-
-// --- Tema claro/escuro ---
-// Persistência simples via localStorage
+// THEME: persist via localStorage and detect system preference
 const THEME_KEY = 'portfolio-theme';
-function setTheme(t) {
-  if (t === 'dark') document.body.classList.add('theme-dark'), document.body.classList.remove('theme-light');
-  else document.body.classList.add('theme-light'), document.body.classList.remove('theme-dark');
-  localStorage.setItem(THEME_KEY, t);
+function applyTheme(theme) {
+  document.body.classList.remove('theme-light','theme-dark');
+  document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light');
+  localStorage.setItem(THEME_KEY, theme);
 }
-const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
-setTheme(savedTheme);
-
-themeToggle.addEventListener('click', () => {
-  const next = document.body.classList.contains('theme-dark') ? 'light' : 'dark';
-  setTheme(next);
+const saved = localStorage.getItem(THEME_KEY);
+if (saved) applyTheme(saved);
+else {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  applyTheme(prefersDark ? 'dark' : 'light');
+}
+themeToggle && themeToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.contains('theme-dark');
+  applyTheme(isDark ? 'light' : 'dark');
 });
 
-// --- Form validation e simulação de envio ---
-// Valida: todos preenchidos e email com regex simples
+// FORM VALIDATION & SIMULATION
 function validateEmail(email) {
-  // Regex simples para validar formato básico (não 100% completa, mas suficiente para exercício)
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-contactForm.addEventListener('submit', (e) => {
-  e.preventDefault(); // evita envio real
-  feedbackEl.textContent = ''; // limpa mensagens anteriores
+contactForm && contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!contactForm) return;
 
+  feedbackEl.textContent = '';
   const name = contactForm.name.value.trim();
   const email = contactForm.email.value.trim();
   const message = contactForm.message.value.trim();
 
-  // Valida campos obrigatórios
   if (!name || !email || !message) {
     feedbackEl.textContent = 'Por favor, preencha todos os campos.';
     feedbackEl.style.color = 'var(--muted)';
     return;
   }
-
-  // Valida formato de email
   if (!validateEmail(email)) {
-    feedbackEl.textContent = 'Por favor, informe um e-mail em formato válido (ex: usuario@dominio.com).';
+    feedbackEl.textContent = 'Por favor, informe um e-mail válido.';
     feedbackEl.style.color = 'crimson';
     return;
   }
 
-  // Se chegou até aqui, "simulamos" o envio:
-  // 1) limpa campos
+  // simula envio: limpa e mostra modal
   contactForm.reset();
-
-  // 2) mostra modal de confirmação (conforme sugestão do enunciado)
-  modal.setAttribute('aria-hidden', 'false');
-
-  // 3) atualiza feedback
+  if (modal) {
+    modal.setAttribute('aria-hidden','false');
+  }
   feedbackEl.textContent = 'Mensagem enviada (simulação).';
   feedbackEl.style.color = 'var(--muted)';
 });
 
-// Reset do formulário pelo botão
-resetBtn.addEventListener('click', () => {
+// reset
+resetBtn && resetBtn.addEventListener('click', () => {
+  if (!contactForm) return;
   contactForm.reset();
   feedbackEl.textContent = '';
 });
 
-// Modal: fechar ao clicar no botão
-modalClose.addEventListener('click', () => {
-  modal.setAttribute('aria-hidden', 'true');
+// modal close
+modalClose && modalClose.addEventListener('click', () => {
+  if (!modal) return;
+  modal.setAttribute('aria-hidden','true');
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal && modal.getAttribute('aria-hidden') === 'false') {
+    modal.setAttribute('aria-hidden','true');
+  }
 });
 
-// Fechar modal com Esc
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
-    modal.setAttribute('aria-hidden', 'true');
-  }
+// simple reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // optionally unobserve to run once
+      obs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+reveals.forEach(r => obs.observe(r));
+
+// make mini-chart bars animate (decorative)
+document.querySelectorAll('.mini-chart span').forEach(s => {
+  const h = s.style.getPropertyValue('--h') || '60%';
+  s.style.height = '6px';
+  setTimeout(()=> s.style.height = h, 150);
+});
+
+// If "Abrir currículo" should open modal instead of new tab (optional)
+openCvBtn && openCvBtn.addEventListener('click', (e) => {
+  // default: opens in new tab; if you want a modal viewer, implement here.
 });

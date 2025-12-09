@@ -4,63 +4,137 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portfolio — Ari Junior</title>
-  <link rel="stylesheet" href="styles.css" />
   <meta name="description" content="Portfólio pessoal de Ari Junior — Sobre, Formação, Portfólio e Contato." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="theme-light bg-pattern">
-  <header class="site-header purple-header shadow-lg">
+<body class="theme-light">
+
+  <!-- Header -->
+  <header class="site-header">
     <a class="brand" href="#sobre">Ari Junior</a>
-    <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
-    <nav id="main-nav" class="nav">
-      <ul>
-        <li><a href="#sobre">Sobre mim</a></li>
-        <li><a href="#formacao">Formação</a></li>
-        <li><a href="#portfolio">Portfólio</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
+
+    <nav class="nav-wrap">
+      <button id="nav-toggle" aria-label="Abrir menu" aria-expanded="false" class="nav-toggle">☰</button>
+
+      <nav id="main-nav" class="nav">
+        <ul>
+          <li><a href="#sobre">Sobre mim</a></li>
+          <li><a href="#formacao">Formação</a></li>
+          <li><a href="#portfolio">Portfólio</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
     </nav>
-    <button id="theme-toggle" aria-label="Alternar tema">🌓</button>
+
+    <div class="header-actions">
+      <button id="theme-toggle" aria-label="Alternar tema" class="btn-icon" title="Alternar tema">🌓</button>
+    </div>
   </header>
 
-  <main>
-    <section id="sobre" class="section container card-frosted">
-      <h1>Sobre mim</h1>
-      <p>Sou Analista de Sistemas Júnior e graduando em Ciência de Dados...</p>
-      <p>Possuo experiência com SAP S/4HANA, SAP CPI, bancos Oracle, MySQL...</p>
-      <p>Destaco-me pela autonomia, organização e comunicação...</p>
-      <p>Estou em constante evolução profissional...</p>
-      <hr>
+  <!-- Main -->
+  <main class="site-main container">
+
+    <!-- Sobre -->
+    <section id="sobre" class="section reveal">
+      <div class="section-grid">
+        <div class="left-col">
+          <h1>Sobre mim</h1>
+
+          <p>
+            Sou <strong>Analista de Sistemas Júnior</strong> e graduando em Ciência de Dados, com forte interesse em tecnologia, dados e inovação.
+            Atuo no desenvolvimento e sustentação de sistemas, sempre buscando soluções eficientes, bem estruturadas e alinhadas às necessidades do negócio.
+          </p>
+
+          <p>
+            Possuo experiência com <strong>SAP S/4HANA</strong>, <strong>SAP CPI (Cloud Integration)</strong>, bancos de dados <strong>Oracle</strong>, <strong>MySQL</strong> e
+            <strong>SQL Server</strong>, além de ferramentas analíticas como <strong>Power BI</strong> e Excel. Já participei ativamente de projetos
+            estratégicos, incluindo virada de ERP, atuando como <em>Key User</em>.
+          </p>
+
+          <p>
+            Destaco-me pela autonomia, organização e capacidade de aprendizado contínuo, além de um perfil comunicativo e colaborativo.
+            Tenho facilidade em trabalhar sob pressão, cumprir prazos e me adaptar rapidamente a novos desafios.
+          </p>
+
+          <p><strong>Hobbies:</strong> Banco de Dados, Artes Marciais, Projetos Pessoais.</p>
+
+          <div class="links-row">
+            <a class="btn btn-primary" href="#portfolio">Ver portfólio</a>
+            <!-- botão para abrir PDF em nova aba -->
+            <a class="btn btn-outline" id="open-cv" href="assets/curriculo.pdf" target="_blank" rel="noopener">Abrir currículo (PDF)</a>
+            <a class="btn btn-ghost" id="download-cv" href="assets/curriculo.pdf" download>Baixar currículo</a>
+          </div>
+        </div>
+
+        <aside class="right-col card-cv">
+          <h3>Currículo — visualização</h3>
+
+          <!-- Mini-preview do PDF (card). Fallback para link direto -->
+          <div class="cv-preview">
+            <object data="assets/curriculo.pdf" type="application/pdf" width="100%" height="260">
+              <p>Seu navegador não exibe PDFs embutidos. <a href="assets/curriculo.pdf" target="_blank" rel="noopener">Abrir currículo</a></p>
+            </object>
+          </div>
+
+          <p class="muted small">Clique em "Abrir currículo" para visualizar em tamanho completo.</p>
+        </aside>
+      </div>
+
+      <hr />
+
       <h3>English version</h3>
-      <p>I am a Junior Systems Analyst and Data Science undergraduate...</p>
-      <p>I have experience with SAP S/4HANA, CPI, Oracle, MySQL...</p>
-      <p>I stand out for autonomy, organization, learning mindset...</p>
-      <p>I aim to deepen knowledge in data and analytics...</p>
-      <p><strong>Hobbies:</strong> Banco de Dados, Artes Marciais, Projetos Pessoais.</p>
+      <p>
+        I am a Junior Systems Analyst and a Data Science undergraduate student, passionate about technology, data, and innovation.
+        I work with system development and support, focused on delivering efficient, well-structured solutions aligned with business needs.
+      </p>
+
+      <p>
+        I have experience with SAP S/4HANA, SAP CPI (Cloud Integration), Oracle, MySQL, and SQL Server databases, as well as analytical tools
+        such as Power BI and Excel. I have participated in strategic projects including ERP migrations, acting as a Key User.
+      </p>
+
     </section>
 
-    <section id="formacao" class="section container card-frosted">
+    <!-- Formação -->
+    <section id="formacao" class="section reveal">
       <h2>Formação</h2>
-      <ul>
+      <ul class="info-list">
         <li><strong>Curso:</strong> Ciência de Dados — Uninter — 2025</li>
         <li><strong>Idiomas:</strong> Português (nativo), Inglês (intermediário)</li>
       </ul>
     </section>
 
-    <section id="portfolio" class="section container card-frosted">
+    <!-- Portfólio -->
+    <section id="portfolio" class="section reveal">
       <h2>Portfólio</h2>
+
       <p>Abaixo alguns trabalhos e links:</p>
+
       <div class="cards">
-        <article class="card item-purple">
-          <h3>Projeto Uninter desenvolvimento web</h3>
-          <p>Este é meu primeiro projeto.</p>
-          <p><a href="https://github.com/Ari0Junior/Trabalho-Uninter-Desenvovimento-web" target="_blank" rel="noopener">Código no GitHub</a></p>
+        <article class="card dashboard-card">
+          <div class="card-head">
+            <h3>Projeto Uninter — Desenvolvimento Web</h3>
+            <span class="tag">Web</span>
+          </div>
+          <p>Primeiro projeto acadêmico — website responsivo criado com HTML/CSS/JS puro.</p>
+          <div class="card-footer">
+            <a href="https://github.com/Ari0Junior/Trabalho-Uninter-Desenvovimento-web" target="_blank" rel="noopener" class="link">Código no GitHub</a>
+            <div class="mini-chart" aria-hidden="true">
+              <!-- decorativo: barras que animam -->
+              <span style="--h:70%"></span><span style="--h:50%"></span><span style="--h:85%"></span><span style="--h:40%"></span>
+            </div>
+          </div>
         </article>
+
+        <!-- você pode duplicar cards aqui para mais projetos -->
       </div>
     </section>
 
-    <section id="contato" class="section container card-frosted">
+    <!-- Contato -->
+    <section id="contato" class="section reveal">
       <h2>Contato</h2>
       <p>Preencha o formulário para enviar uma mensagem (simulação).</p>
+
       <form id="contact-form" novalidate>
         <label for="name">Nome</label>
         <input id="name" name="name" type="text" required placeholder="Seu nome completo" />
@@ -72,25 +146,32 @@
         <textarea id="message" name="message" rows="6" required placeholder="Escreva sua mensagem..."></textarea>
 
         <div class="form-actions">
-          <button type="submit" class="btn-purple">Enviar mensagem</button>
-          <button type="button" id="reset-btn">Limpar</button>
+          <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+          <button type="button" id="reset-btn" class="btn btn-outline">Limpar</button>
         </div>
 
         <div id="form-feedback" role="status" aria-live="polite" class="feedback"></div>
       </form>
     </section>
+
   </main>
 
+  <!-- Modal de confirmação -->
   <div id="modal" class="modal" aria-hidden="true">
-    <div class="modal-content card-frosted" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <h3 id="modal-title">Mensagem enviada com sucesso!</h3>
-      <p>Obrigado — sua mensagem foi simulada.</p>
-      <button id="modal-close" class="btn-purple">Fechar</button>
+    <div class="modal-content">
+      <h3>Mensagem enviada com sucesso!</h3>
+      <p>Obrigado — sua mensagem foi simulada (não houve envio real).</p>
+      <div class="modal-actions">
+        <button id="modal-close" class="btn btn-primary">Fechar</button>
+      </div>
     </div>
   </div>
 
-  <footer class="site-footer container">
-    <p>© <span id="year"></span> Ari Junior — <a href="#sobre">Voltar ao topo</a></p>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> Ari Junior — <a href="#sobre">Voltar ao topo</a></p>
+    </div>
   </footer>
 
   <script src="script.js" defer></script>
